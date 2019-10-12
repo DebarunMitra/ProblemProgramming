@@ -4,14 +4,14 @@
 #include<stdlib.h>
 void element();
 void multipli();
-void transpose();
+void transpose(int,int);
 void rotate180();
 void rotate90(int,int);
 void reverseColumns();
 void display(int,int);
 int length();
 int i,j,k,l,m,n,p,q;
-int arr1[30][30],arr2[30][30],arr3[30][30],row90,col90;
+int arr1[30][30],arr2[30][30],arr3[30][30],row90,col90,tranc,tranr;
 int main(){
 	while(1)
 	{
@@ -31,7 +31,7 @@ int main(){
 					break;
 			case 2 :multipli();
 					break;
-			case 3 :transpose();
+			case 3 :transpose(tranr,tranc);
 					break;
 			case 4 :rotate90(row90,col90);
 					break;
@@ -55,7 +55,7 @@ void element()
     	for(i=0;i<=m-1;i++)
   	    	for(j=0;j<=n-1;j++)
 		    	scanf("%d",&arr1[i][j]);	
-		    	row90=m;col90=n;
+		    	row90=m;col90=n;tranr=m,tranc=n;
 	display(m,n);
 }
 void multipli(){
@@ -106,17 +106,19 @@ void multipli(){
 	        				printf("\n");
 	        		}
 }
-void transpose(){
+void transpose(int trr,int trc){
 	int temp;
-		for (i = 0; i < m; i++){
-				for (j = i; j < n; j++){
+	(trr!=trc)?(trr>trc)?(trc=trc+1,tranr=trr-1,tranc=trc):(trr<trc)?(trr=trr+1,tranr=trr,tranc=trc-1):false:false;
+		for (i = 0; i < trr; i++){
+				for (j = i; j < trc; j++){
 					temp=arr1[i][j];
 					arr1[i][j]=arr1[j][i];
 					arr1[j][i]=temp;
 				} 
 		}
 		printf("\nTranspose of entered matrix\n");
-	    display(m,n);
+		row90=tranr;col90=tranc;
+	    display(tranr,tranc);
 }
 void display(int row,int col){
 		printf("\nMatrix:\n");
