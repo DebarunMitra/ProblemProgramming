@@ -6,8 +6,9 @@ void element();
 void multipli();
 void transpose(int,int);
 void rotate180();
-void rotate90(int,int);
-void reverseColumns();
+void rotate90clock(int,int);
+void rotate90aclock(int,int);
+void reverseColumns(int,int);
 void display(int,int);
 int length();
 int i,j,k,l,m,n,p,q;
@@ -19,7 +20,8 @@ int main(){
 		printf("\n1.Enter Matrix\n");
 		printf("2.Multipli Matrix\n");
 		printf("3.Transpose Matrix\n");
-		printf("4.Rotate 90 deg:\n");
+		printf("4.Rotate 90 deg(clock wise):\n");
+		printf("5.Rotate 90 deg(anti-clock wise):\n");
 	//	printf("5.Display\n");
 	//	printf("6.Length\n");
 		printf("7.Exit\n");
@@ -33,7 +35,11 @@ int main(){
 					break;
 			case 3 :transpose(tranr,tranc);
 					break;
-			case 4 :rotate90(row90,col90);
+			case 4 :rotate90clock(row90,col90);
+					break;
+			case 5 :rotate90aclock(row90,col90);
+					break;
+			case 6 :reverseColumns(row90,col90);
 					break;
 		/*	case 5 :display();
 					break;
@@ -126,22 +132,23 @@ void display(int row,int col){
 	        {
 	        	for(j=0;j<col;j++)
 	        	{
-	        		printf("\t%d",arr1[i][j]);
+	        		printf("%d\t",arr1[i][j]);
 	        	}
 	        	printf("\n");
 	        }
 }
-void reverseColumns(){
+void reverseColumns(int x,int y){
 	int temp;
-	for (i = 0; i < n; i++) {
-			for (j = 0, k = n - 1; j < k; j++, k--) {
+	for (i=0;i<x;i++) {
+			for (j = 0, k = y - 1; j < k; j++, k--) {
 					temp=arr1[j][i];
 					arr1[j][i]=arr1[k][i];
 					arr1[k][i]=temp;
 			} 
 	}
+	display(row90,col90);
 }
-void rotate90(int x, int y){
+void rotate90clock(int x, int y){
 	int i,j,rot[30][30],r=y,c=x;
 	for(i=0;i<row90;i++){
 		for(j=0;j<col90;j++){
@@ -163,5 +170,29 @@ void rotate90(int x, int y){
 	        }
 	        //arr1=rot;
 	        row90=y;col90=x;
+	        display(row90,col90);
+}
+void rotate90aclock(int x, int y){
+	int i,j,rot[30][30],r=y,c=x;
+	for(i=0;i<row90;i++){
+		for(j=0;j<col90;j++){
+			rot[r-1][i]=arr1[i][j];
+		//	printf("\trot[%d][%d]:%d",r-1,j,rot[r-1][i]);
+			r-=1;
+		}
+		//	printf("\n");
+			r=y;
+	}
+//	printf("\nMatrix 90 deg(anti clock):\n");
+	        for(i=0;i<col90;i++)
+	        {
+	        	for(j=0;j<row90;j++)
+	        	{
+	        		//printf("\t%d",rot[i][j]);
+	        		arr1[i][j]=rot[i][j];
+	        	}
+	        //	printf("\n");
+	        }
+	      	row90=y;col90=x;
 	        display(row90,col90);
 }
