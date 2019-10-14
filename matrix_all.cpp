@@ -10,7 +10,6 @@ void rotate90clock(int,int);
 void rotate90aclock(int,int);
 void reverseColumns(int,int);
 void display(int,int);
-int length();
 int i,j,k,l,m,n,p,q;
 int arr1[30][30],arr2[30][30],arr3[30][30],row90,col90,tranc,tranr;
 int main(){
@@ -22,9 +21,7 @@ int main(){
 		printf("3.Transpose Matrix\n");
 		printf("4.Rotate 90 deg(clock wise):\n");
 		printf("5.Rotate 90 deg(anti-clock wise):\n");
-	//	printf("5.Display\n");
-	//	printf("6.Length\n");
-		printf("7.Exit\n");
+		printf("6.Exit\n");
 		printf("Enter your choise:");
 		scanf("%d",&ch);
 		switch(ch)
@@ -39,14 +36,9 @@ int main(){
 					break;
 			case 5 :rotate90aclock(row90,col90);
 					break;
-			case 6 :reverseColumns(row90,col90);
-					break;
-		/*	case 5 :display();
-					break;
-			case 6 :l=length();
-					printf("\n%d\n",l);
+			/*case 6 :reverseColumns(row90,col90);
 					break;*/
-			case 7 : exit(0);
+			case 6 : exit(0);
 					 break;
 			default : printf("Invalid input \n\n ");
 		}
@@ -183,7 +175,7 @@ void rotate90aclock(int x, int y){
 		//	printf("\n");
 			r=y;
 	}
-//	printf("\nMatrix 90 deg(anti clock):\n");
+		//	printf("\nMatrix 90 deg(anti clock):\n");
 	        for(i=0;i<col90;i++)
 	        {
 	        	for(j=0;j<row90;j++)
