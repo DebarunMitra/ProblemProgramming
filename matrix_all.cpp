@@ -6,9 +6,11 @@ void element();
 void multipli();
 void transpose(int,int);
 void rotate180();
+void optrotate90aclock(int,int);
 void rotate90clock(int,int);
 void rotate90aclock(int,int);
 void reverseColumns(int,int);
+void pointCounter(int,int);
 void display(int,int);
 int i,j,k,l,m,n,p,q;
 int arr1[30][30],arr2[30][30],arr3[30][30],row90,col90,tranc,tranr;
@@ -19,26 +21,46 @@ int main(){
 		printf("\n1.Enter Matrix\n");
 		printf("2.Multipli Matrix\n");
 		printf("3.Transpose Matrix\n");
-		printf("4.Rotate 90 deg(clock wise):\n");
-		printf("5.Rotate 90 deg(anti-clock wise):\n");
-		printf("6.Exit\n");
-		printf("Enter your choise:");
+		printf("4.Rotate 90 deg(clock wise)\n");
+		printf("5.Rotate 90 deg(anti-clock wise)\n");
+		printf("6.Rotate 180 deg(clock wise)\n");
+		printf("7.Rotate 180 deg(anti-clock wise)\n");
+		printf("8.Rotate 90 deg(a-c,n X n)\n");
+		printf("9.Count Point\n");
+		printf("11.Exit\n");
+		printf("Enter your choice:");
 		scanf("%d",&ch);
 		switch(ch)
 		{
 			case 1 :element();
+					display(m,n);
 					break;
 			case 2 :multipli();
 					break;
 			case 3 :transpose(tranr,tranc);
+					display(tranr,tranc);
 					break;
 			case 4 :rotate90clock(row90,col90);
+				    display(row90,col90);
 					break;
 			case 5 :rotate90aclock(row90,col90);
+				    display(row90,col90);
 					break;
-			/*case 6 :reverseColumns(row90,col90);
-					break;*/
-			case 6 : exit(0);
+			case 6 :rotate90clock(row90,col90);
+					rotate90clock(row90,col90);
+					display(row90,col90);
+					break;
+			case 7 :rotate90aclock(row90,col90);
+					rotate90aclock(row90,col90);
+					display(row90,col90);
+					break;
+			case 8 :optrotate90aclock(row90,col90);
+					display(row90,col90);
+					break;
+			case 9 :pointCounter(row90,col90);
+					//display(row90,col90);
+					break;
+			case 11 : exit(0);
 					 break;
 			default : printf("Invalid input \n\n ");
 		}
@@ -54,7 +76,6 @@ void element()
   	    	for(j=0;j<=n-1;j++)
 		    	scanf("%d",&arr1[i][j]);	
 		    	row90=m;col90=n;tranr=m,tranc=n;
-	display(m,n);
 }
 void multipli(){
 		printf("\nEnter 2nd matrix row & column:");
@@ -116,7 +137,6 @@ void transpose(int trr,int trc){
 		}
 		printf("\nTranspose of entered matrix\n");
 		row90=tranr;col90=tranc;
-	    display(tranr,tranc);
 }
 void display(int row,int col){
 		printf("\nMatrix:\n");
@@ -141,8 +161,8 @@ void reverseColumns(int x,int y){
 	display(row90,col90);
 }
 void rotate90clock(int x, int y){
-	int i,j,rot[30][30],r=y,c=x;
-	for(i=0;i<row90;i++){
+	int i,j,rot[30][30],r=y,c=x,temp;
+	for(i=0;i<row90/2;i++){
 		for(j=0;j<col90;j++){
 			rot[j][c-1]=arr1[i][j];
 		//	printf("\trot[%d][%d]:%d",j,c-1,rot[j][c-1]);
@@ -150,7 +170,7 @@ void rotate90clock(int x, int y){
 		//	printf("\n");
 			c-=1;
 	}
-	printf("\nMatrix 90 deg:\n");
+	//printf("\nMatrix 90 deg:\n");
 	        for(i=0;i<col90;i++)
 	        {
 	        	for(j=0;j<row90;j++)
@@ -160,9 +180,7 @@ void rotate90clock(int x, int y){
 	        	}
 	        	//printf("\n");
 	        }
-	        //arr1=rot;
 	        row90=y;col90=x;
-	        display(row90,col90);
 }
 void rotate90aclock(int x, int y){
 	int i,j,rot[30][30],r=y,c=x;
@@ -186,5 +204,43 @@ void rotate90aclock(int x, int y){
 	        //	printf("\n");
 	        }
 	      	row90=y;col90=x;
-	        display(row90,col90);
+}
+void optrotate90aclock(int x,int y){
+	int i,j,rot[30][30],r=y,c=x,temp;
+	for(i=0;i<row90/2;i++){
+		for(j=0;j<row90-i-1;j++){
+            temp = arr1[i][j];   
+            arr1[i][j] = arr1[j][row90-1-i]; 
+            arr1[j][row90-1-i] = arr1[row90-1-i][row90-1-j]; 
+            arr1[row90-1-i][row90-1-j] = arr1[row90-1-j][i]; 
+            arr1[row90-1-j][i] = temp; 
+		}
+	}
+}
+void pointCounter(int row,int col){
+	int point=0,p[10],count=0,num[10];
+	for(i=0;i<row;i++)
+	        {
+	        	for(j=0;j<col;j++)
+	        	{
+	        		//printf("%d\t",arr1[i][j]);
+	        		//num[j]=arr1[i][j];
+	        		if(j>=3){
+	        			if(num[j-1]==num[j-2] && num[j-2]==num[j-3] && num[j-1]==num[j-3]){
+	        				//printf("\telse");
+							point+=10*3;
+	        			}
+	        			else{
+	        			//	printf("\telse");
+	        				num[j]=arr1[i][j];
+	        			}
+	        		}
+	        		else{
+	        			num[j]=arr1[i][j];
+	        		}
+	        		//printf("\t\tnum:%d",num[j]);
+	        	}
+	        	//printf("\n");
+	        }
+	        	        	printf("\t\tPOINT:%d",point);
 }
