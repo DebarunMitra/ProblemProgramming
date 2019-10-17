@@ -74,6 +74,13 @@ void enterValue(int r,int c)
 				for(p=arr[i];p->south!=NULL;p=p->south);
 				p->south=temp;
 				temp->north=p;
+				if(i>0){
+					q=(struct node *)malloc(sizeof(struct node));
+					for(q=arr[i-1],k=0;k<j;q=q->south,k++);
+					printf("\nq.data:%d ,q.east:%d ,q.east:%d \n",q->data,q->east,q->west);
+					q->east=temp;
+					temp->west=q;	
+				}
 			}	
 		}
 	}
