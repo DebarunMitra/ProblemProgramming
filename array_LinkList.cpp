@@ -56,11 +56,28 @@ void setRowCol(){
 void enterValue(int r,int c)
 {
 	struct node *p,*q;
+	int i,j,k;
 	for(i=0;i<r;i++){
 		arr[i]=(struct node *)malloc(sizeof(struct node));
-		root[i]=NULL;
-		
+		arr[i]=NULL;
+		for(j=0;j<c;j++){
+			struct node *temp;
+			temp=(struct node *)malloc(sizeof(struct node));
+			printf("Enter node data:");
+			scanf("%d",&temp->data);
+			temp->east=NULL;temp->west=NULL;temp->north=NULL;temp->south=NULL;
+			if(arr[i]==NULL){
+				arr[i]=temp;
+			}
+			else{
+				p=(struct node *)malloc(sizeof(struct node));
+				for(p=arr[i];p->south!=NULL;p=p->south);
+				p->south=temp;
+				temp->north=p;
+			}	
+		}
 	}
+	traverseValue(r,c);
 }
 void traverseValue(int r,int c)
 {
