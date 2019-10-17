@@ -1,8 +1,10 @@
 /*
-Scoring Tetris game
-Step 3.1: Process each row independently considering no vacant space, If a row is filled, calculate score based on longest chain of same color
-Step 3.2: Now consider vacant spaces also
-Step 3.3: Process rows entirely to find longest chains
+Author:Debarun Mitra
+Objective:
+	Scoring Tetris game
+	Step 3.1: Process each row independently considering no vacant space, If a row is filled, calculate score based on longest chain of same color
+	Step 3.2: Now consider vacant spaces also
+	Step 3.3: Process rows entirely to find longest chains
 */
 #include<stdio.h>
 #include<conio.h>
