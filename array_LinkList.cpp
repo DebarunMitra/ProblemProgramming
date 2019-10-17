@@ -75,9 +75,11 @@ void enterValue(int r,int c)
 				p->south=temp;
 				temp->north=p;
 				if(i>0){
+					arr[i-1]->east=arr[i];
+					arr[i]->west=arr[i-1];
 					q=(struct node *)malloc(sizeof(struct node));
 					for(q=arr[i-1],k=0;k<j;q=q->south,k++);
-					printf("\nq.data:%d ,q.east:%d ,q.east:%d \n",q->data,q->east,q->west);
+					printf("\nq.data:%d q.data:%d ,q.east:%d ,q.east:%d \n",q->data,q->east,q->west);
 					q->east=temp;
 					temp->west=q;	
 				}
@@ -93,8 +95,8 @@ void traverseValue(int r,int c)
 			struct node *temp;
 			temp=(struct node *)malloc(sizeof(struct node));
 			for(temp=arr[i];temp->south!=NULL;temp=temp->south){
-				printf("data:%d\n",temp->data);
+				printf("arr:%d, arr->data:%d, arr->north:%d, arr->east:%d, arr->south:%d, arr->west:%d,\n",temp,temp->data,temp->north,temp->east,temp->south,temp->west);
 			}
-			printf("data:%d\n",temp->data);
+			printf("arr:%d, arr->data:%d, arr->north:%d, arr->east:%d, arr->south:%d, arr->west:%d,\n",temp,temp->data,temp->north,temp->east,temp->south,temp->west);
 		}
 }
