@@ -9,7 +9,7 @@ Step 3.3: Process rows entirely to find longest chains
 #include<stdlib.h>
 void setRowCol();
 void enterValue(int,int);
-void traverseValue();
+void traverseValue(int,int);
 struct node
 {
 	int data;
@@ -38,7 +38,7 @@ int main()
 					break;
 			case 2 :enterValue(c_row,c_col);
 					break;
-			case 3 :traverseValue();
+			case 3 :traverseValue(c_row,c_col);
 					break;
 			case 4 : exit(0);
 					 break;
@@ -62,9 +62,15 @@ void enterValue(int r,int c)
 		
 	}
 }
-
-void traverseValue()
+void traverseValue(int r,int c)
 {
-
+		int i;
+		for(i=0;i<r;i++){
+			struct node *temp;
+			temp=(struct node *)malloc(sizeof(struct node));
+			for(temp=arr[i];temp->south!=NULL;temp=temp->south){
+				printf("data:%d\n",temp->data);
+			}
+			printf("data:%d\n",temp->data);
+		}
 }
-
