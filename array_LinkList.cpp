@@ -10,6 +10,7 @@ Step 3.3: Process rows entirely to find longest chains
 void setRowCol();
 void enterValue(int,int);
 void traverseColValue(int,int);
+void traverseRowValue(int,int);
 struct node
 {
 	int data;
@@ -28,8 +29,9 @@ int main()
 		int ch,item;
 		printf("\n1.Enter Block ROW & COL\n");
 		printf("2.Enter Element\n");
-		printf("3.Traverse Element\n");
-		printf("4.Exit\n");
+		printf("3.Traverse By Column\n");
+		printf("4.Traverse By Row\n");
+		printf("5.Exit\n");
 		printf("Enter your choise:");
 		scanf("%d",&ch);
 		switch(ch)
@@ -40,8 +42,10 @@ int main()
 					break;
 			case 3 :traverseColValue(c_row,c_col);
 					break;
-			case 4 : exit(0);
-					 break;
+			case 4 :traverseRowValue(c_row,c_col);
+					break;
+			case 5 :exit(0);
+					break;
 			default : printf("Invalid input \n\n ");
 		}
 	}
@@ -86,7 +90,7 @@ void enterValue(int r,int c)
 			}	
 		}
 	}
-	traverseValue(r,c);
+	traverseColValue(r,c);
 }
 void traverseColValue(int r,int c)
 {
@@ -95,8 +99,28 @@ void traverseColValue(int r,int c)
 			struct node *temp;
 			temp=(struct node *)malloc(sizeof(struct node));
 			for(temp=arr[i];temp->south!=NULL;temp=temp->south){
-				printf("arr:%d, arr->data:%d, arr->north:%d, arr->east:%d, arr->south:%d, arr->west:%d,\n",temp,temp->data,temp->north,temp->east,temp->south,temp->west);
+					printf("arr[%d]:%d, arr->data:%d, arr->north:%d, arr->east:%d, arr->south:%d, arr->west:%d,\n",i,temp,temp->data,temp->north,temp->east,temp->south,temp->west);
 			}
-			printf("arr:%d, arr->data:%d, arr->north:%d, arr->east:%d, arr->south:%d, arr->west:%d,\n",temp,temp->data,temp->north,temp->east,temp->south,temp->west);
+					printf("arr[%d]:%d, arr->data:%d, arr->north:%d, arr->east:%d, arr->south:%d, arr->west:%d,\n",i,temp,temp->data,temp->north,temp->east,temp->south,temp->west);
 		}
+}
+void traverseRowValue(int r,int c)
+{
+		int i,j=0;
+		struct node *temp,*hand;
+		temp=(struct node *)malloc(sizeof(struct node));
+		hand=(struct node *)malloc(sizeof(struct node));
+		temp=arr[0];
+		hand=arr[0];				
+		printf("%d\n\n",hand->data);
+		for(i=0;i<r;i++){
+				while(temp!=NULL){
+					printf("arr[%d]:%d, arr->data:%d, arr->north:%d, arr->east:%d, arr->south:%d, arr->west:%d,\n",j,temp,temp->data,temp->north,temp->east,temp->south,temp->west);
+					temp=temp->east;	j++;
+			}
+			temp=hand->south;
+			hand=hand->south;	
+			j=0;
+		}
+			
 }
