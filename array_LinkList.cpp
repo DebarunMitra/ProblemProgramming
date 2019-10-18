@@ -1,10 +1,8 @@
 /*
-Author:Debarun Mitra
-Objective:
-	Scoring Tetris game
-	Step 3.1: Process each row independently considering no vacant space, If a row is filled, calculate score based on longest chain of same color
-	Step 3.2: Now consider vacant spaces also
-	Step 3.3: Process rows entirely to find longest chains
+Scoring Tetris game
+Step 3.1: Process each row independently considering no vacant space, If a row is filled, calculate score based on longest chain of same color
+Step 3.2: Now consider vacant spaces also
+Step 3.3: Process rows entirely to find longest chains
 */
 #include<stdio.h>
 #include<conio.h>
@@ -98,7 +96,7 @@ void enterValue(int r,int c)
 		}
 	}
 	//traverseColValue(r,c);
-	traverseRowValue(r,c);
+//	traverseRowValue(r,c);
 }
 void traverseColValue(int r,int c)
 {
@@ -136,40 +134,43 @@ void traverseRowValue(int r,int c)
 			
 }
 void pointRowValues(int r,int c){
-	int i,j=0,point=0,count=1;
-		struct node *temp,*hand;
+	int i,j=0,k=0,point=0,count=1;
+		struct node *temp,*hand,*p;
 		temp=(struct node *)malloc(sizeof(struct node));
 		hand=(struct node *)malloc(sizeof(struct node));
+		p=(struct node *)malloc(sizeof(struct node));
 		temp=arr[0];
 		hand=arr[0];				
 	//	printf("%d\n\n",hand->data);
 		for(i=0;i<c;i++){
 				while(temp!=NULL){
-				//	printf("arr[%d]:%d, arr->data:%d, arr->north:%d, arr->east:%d, arr->south:%d, arr->west:%d,\n",j,temp,temp->data,temp->north,temp->east,temp->south,temp->west);
-					//printf("%d\t",temp->data);
+					printf("%d\t",temp->data);
 					temp=temp->east;j++;
-					if(j>0){
-						printf("%d,%d\t",temp->data,temp->west->data);		
-						/*if(temp->data==temp->west->data){
-							count+=1;
-							if(i==c-1){//for all match
-	        					point+=pow(2,count);
-	        				}
-						}
-						else{
-	        					point+=pow(2,count);
-	        					count=1;
-	        					if(i==c-1){
+					if(j==c-1){
+						p=temp;
+						while(p->west!=NULL){
+							if(p->data==p->west->data){
+								count+=1;
+						  		if(k==c-2){
 	        						point+=pow(2,count);
 	        					}
-	        			}*/
+							}
+							else{
+	        					point+=pow(2,count);
+	        					count=1;
+	        					if(k==c-2){
+	        						point+=pow(2,count);
+	        					}
+	        				}
+							//printf("%d,%d\t",p->data,p->west->data);	
+							p=p->west; k++;
+						}
 					}
+				}
+						printf("\t\tROW POINT:%d\n",point);
 						temp=hand->south;
 						hand=hand->south;	
-						j=0;//printf("\n");
-				}
+						j=0;k=0;count=1;
 		}
-					printf("\t\tFinal POINT:%d",point);
+					printf("\t\tFinal POINT:%d\n",point);
 }
-
-
